@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+    width: 100vw; /* Asegura que el body ocupe todo el ancho de la ventana */
+    height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    margin: 0; /* Elimina el margen automático */
+    background-color: #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative; /* Añadido para que el posicionamiento absoluto funcione */
+    flex: 1; /* Asegura que el contenedor ocupe el espacio disponible */
+}
+
+.header {
+    background-color: #ccc;
+    color: #000000;
+    padding: 20px;
+    text-align: center;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    flex: 1; /* Asegura que el contenido principal ocupe el espacio disponible */
+}
+
+.boxes-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    padding: 0 20px; /* Añade padding a los lados */
+    margin-bottom: 20px; /* Espacio inferior para separar del player */
+}
+
+.box {
+    flex: 1; /* Asegura que cada caja ocupe un tercio del espacio disponible */
+    height: 100px;
+    background-color: #ccc; /* Fondo gris */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px; /* Añade margen entre las cajas */
+}
+
+.player {
+    flex: 2;
+    text-align: center;
+    position: fixed; /* Cambiado a fixed para que ocupe todo el ancho de la ventana */
+    bottom: 0;
+    left: 0; /* Asegura que el div comience desde el borde izquierdo de la ventana */
+    width: 100%; /* Asegura que el div ocupe todo el ancho de la ventana */
+    background-color: #ccc; /* Añade un fondo para que sea visible */
+    padding: 10px; /* Reduce el padding para hacer el div más pequeño */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Añade una sombra para destacar el div */
+}
+
+.current-song {
+    text-align: left; /* Alinea el nombre de la canción a la izquierda */
+    padding-left: 20px; /* Añade un padding a la izquierda para separar el texto del borde */
+    display: flex;
+    color: #000000;
+    align-items: center; /* Alinea verticalmente la imagen y el texto */
+    margin-bottom: 0; /* Elimina el margen inferior */
+}
+
+.song-image {
+    width: 140px; /* Ajusta el tamaño de la imagen */
+    height: 140px; /* Ajusta el tamaño de la imagen */
+    margin-right: 5px; /* Añade un margen a la derecha de la imagen */
+    margin-bottom: -70px; /* Añade un margen en la parte inferior para mover la imagen hacia abajo */
+}
+
+.controls {
+    margin-top: 0; /* Elimina el margen superior */
+    /* color: #fff; /* Cambia el color del texto a blanco */
+}
+
+.controls button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    background-color: #14833b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    background-color: #1a542e;
+}
+
+.controls img {
+    width: 20px; /* Ajusta el tamaño de los iconos */
+    height: 20px; /* Ajusta el tamaño de los iconos */
+}
+
+.progress-container {
+    width: 60%; /* Ajusta el ancho de la barra de progreso */
+    margin: 10px auto; /* Centra la barra de progreso */
+}
+
+#progress {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
+    background: linear-gradient(to right, #14833b 0%, #14833b var(--progress-value), #fff var(--progress-value), #fff 100%);
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #ffffff; /* Color verde para el icono de avance */
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+#progress::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #ffffff; /* Color verde para el icono de avance */
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+#progress::-webkit-slider-runnable-track {
+    background: #38c369;
+}
+
+#progress::-moz-range-track {
+    background: #38c369;
+}

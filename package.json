@@ -1,0 +1,12 @@
+{
+  "name": "mi-proyecto-html",
+  "version": "1.0.0",
+  "description": "Un proyecto HTML básico con estilos y scripts.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "open src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
