@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Reproductor de Audio</title>
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/styles.css" />
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <h1>Reproductor de Audio</h1>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button class="register-btn" onclick="openModal()">Registrarse</button>
+                <h1 style="align-items: center;">Reproductor de Audio</h1>
+            </div>
         </header>
         <main class="main-content">
             <div class="boxes-container">
@@ -27,26 +30,80 @@
             <div class="player">
                 <audio id="audio" controls></audio>
                 <div class="current-song">
-                    <img src="../SongData/Images/placeholder.jpg" alt="Imagen de la canción" class="song-image">
+                    <img src="../SongData/Images/placeholder.jpg" alt="Imagen de la canción" class="song-image" />
                     <div class="song-details">
                         <p class="Song">Canción</p>
                         <p class="Singer">Artista</p>
                     </div>
                 </div>
                 <div class="progress-container">
-                    <input type="range" id="progress" value="0" max="100">
+                    <input type="range" id="progress" value="0" max="100" />
                 </div>
                 <div class="controls">
                     <button id="play">Play</button>
-                    <button><img src="../Icons/Random.png" alt="aleatoria" class="RandomIcon"></button>
-                    <button><img src="../Icons/LastSong.png" alt="anterior" class="LastIcon"></button>
-                    <button><img src="../Icons/PlayButton.png" alt="play" class="PlayIcon"></button>
-                    <button><img src="../Icons/NextSong.png" alt="siguiente" class="NextIcon"></button>
-                    <button><img src="../Icons/BucleButton.png" alt="bucle" class="LoopIcon"></button>
+                    <button><img src="../Icons/Random.png" alt="aleatoria" class="RandomIcon" /></button>
+                    <button><img src="../Icons/LastSong.png" alt="anterior" class="LastIcon" /></button>
+                    <button><img src="../Icons/PlayButton.png" alt="play" class="PlayIcon" /></button>
+                    <button><img src="../Icons/NextSong.png" alt="siguiente" class="NextIcon" /></button>
+                    <button><img src="../Icons/BucleButton.png" alt="bucle" class="LoopIcon" /></button>
                 </div>
             </div>
         </main>
     </div>
+
+    <!-- Modal de registro -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Registro de Usuario</h2>
+            <input type="text" id="name" placeholder="Nombre" />
+            <input type="email" id="email" placeholder="Correo electrónico" />
+            <input type="password" id="password" placeholder="Contraseña" />
+            <button onclick="submitRegistration()">Registrarse</button>
+        </div>
+    </div>
+
     <script src="../scripts/AudioSync.js"></script>
+    <script>
+        function openModal() {
+            document.getElementById("registerModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("registerModal").style.display = "none";
+        }
+
+        async function submitRegistration() {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (!name || !email || !password) {
+                alert("Por favor completa todos los campos.");
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:8080/spotify/usuarios/registro", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ name, email, password }),
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert("Registro exitoso!");
+                    closeModal();
+                } else {
+                    const errorData = await response.json();
+                    alert("Error en el registro: " + (errorData.message || response.statusText));
+                }
+            } catch (error) {
+                alert("Error de conexión: " + error.message);
+            }
+        }
+    </script>
 </body>
 </html>
